@@ -1,6 +1,4 @@
 #!/bin/bash +x
 
-echo "testing the code first...."
-
-echo "testing secind shell script and again and again...."
-
+echo "Going to trigger second job of this pipline.."
+echo "This Job will be trigger if first succeeds..."

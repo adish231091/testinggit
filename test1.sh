@@ -1,11 +1,6 @@
 #!/bin/bash +x
 
-echo "deploying the code first...."
+echo "Going to trigger first job of this pipline demo..."
 
-fname="adish"
-lname="sharma"
-
-echo $fname
-echo $lname
-
+echo "This job should complete within 1 second..."
 
