@@ -2,4 +2,4 @@
 
 echo "Executing Fourth Job dependent on third one.."
 sleep 30
-ech "ETA is less than 10 seconds..."
+echo "ETA is less than 10 seconds..."
