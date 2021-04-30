@@ -13,7 +13,7 @@ IsTenantExist()
 		IsObjectExist="http://${Host}:${Port}/api-metadata/v1/metadata/tenants/${Id}"
 		echo $IsObjectExist
 
-		IsObjectExistOutput=$(curl -o ${WORKSPACE}sanity/adw/IsTenantExists.txt -w '%{http_code}' -X GET ${IsObjectExist} -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtY3BzIiwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS5vcmFjbGVjbG91ZC5jb20vIiwiYXVkIjoidXJuOm9jeDpvdWRwaWQ6cGh4Om91ZHBzbXNlcnZlciIsInN1Yl90eXBlIjoiY2xpZW50Iiwic2NvcGUiOiJ1cm46b2N4Om91ZHBzY29wZTpjbGllbnQiLCJleHAiOjE1OTg5MjI1MTAsImlhdCI6MTU5ODU2MzY2MiwianRpIjoiNWY4MzkwMWMtZjZkYy00NGYxLWJiMGEtYmQ2Y2RmMjliYmRiIn0.JM03enklc-58b0Gu-q8mcWI4gngJB5LV4E0cQAIfOgM" -H "Content-type: application/json")
+		IsObjectExistOutput=$(curl -o ${WORKSPACE}/sanity/adw/IsTenantExists.txt -w '%{http_code}' -X GET ${IsObjectExist} -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtY3BzIiwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS5vcmFjbGVjbG91ZC5jb20vIiwiYXVkIjoidXJuOm9jeDpvdWRwaWQ6cGh4Om91ZHBzbXNlcnZlciIsInN1Yl90eXBlIjoiY2xpZW50Iiwic2NvcGUiOiJ1cm46b2N4Om91ZHBzY29wZTpjbGllbnQiLCJleHAiOjE1OTg5MjI1MTAsImlhdCI6MTU5ODU2MzY2MiwianRpIjoiNWY4MzkwMWMtZjZkYy00NGYxLWJiMGEtYmQ2Y2RmMjliYmRiIn0.JM03enklc-58b0Gu-q8mcWI4gngJB5LV4E0cQAIfOgM" -H "Content-type: application/json")
 
 		echo $IsObjectExistOutput
 
@@ -54,7 +54,7 @@ CreateTenant()
 		
 		TenantCreateCall="http://${Host}:${Port}/api-metadata/v1/metadata/tenants"
 
-		TenantCreateOutput=$(curl -o ${WORKSPACE}sanity/adw/TenantDetails.txt -w '%{http_code}' -X POST ${TenantCreateCall} -d '{
+		TenantCreateOutput=$(curl -o ${WORKSPACE}/sanity/adw/TenantDetails.txt -w '%{http_code}' -X POST ${TenantCreateCall} -d '{
 	"id" : '"${TenantId}"',
 	"parentTenantID" : 0,
 	"abbreviation" : "testing Jira",
@@ -77,13 +77,13 @@ CreateTenant()
 CreateSourceInstance()
 {
 	
-	TenantAccessKey=$(sed -E 's/.*"accessKey":"?([^,"]*)"?.*/\1/' ${WORKSPACE}sanity/adw/TenantDetails.txt)
+	TenantAccessKey=$(sed -E 's/.*"accessKey":"?([^,"]*)"?.*/\1/' ${WORKSPACE}/sanity/adw/TenantDetails.txt)
 	echo "Tenant Access Key : " $TenantAccessKey
 	SourceInstanceCreateCall="http://${Host}:${Port}/api-metadata/v1/${TenantAccessKey}/metadata/sourceinstances"
 	
 	TenantId=$1
 	echo $SourceInstanceCreateCall
-        SourceInstanceCreateOutput=$(curl -o ${WORKSPACE}sanity/adw/SourceInstance.txt -w '%{http_code}' -X POST ${SourceInstanceCreateCall} -d '{
+        SourceInstanceCreateOutput=$(curl -o ${WORKSPACE}/sanity/adw/SourceInstance.txt -w '%{http_code}' -X POST ${SourceInstanceCreateCall} -d '{
   	"tenantId": '"${TenantId}"',
   	"name": "SanityCheckCSV_SOURCE",
   	"versionTS": 1614319146240,
@@ -116,13 +116,13 @@ CreateSourceInstance()
 CreateSinkInstance()
 {
 	 
-	TenantAccessKey=$(sed -E 's/.*"accessKey":"?([^,"]*)"?.*/\1/' ${WORKSPACE}sanity/adw/TenantDetails.txt)
+	TenantAccessKey=$(sed -E 's/.*"accessKey":"?([^,"]*)"?.*/\1/' ${WORKSPACE}/sanity/adw/TenantDetails.txt)
     	echo "Tenant Access Key : " $TenantAccessKey
 
 	SinkInstanceCreateCall="http://${Host}:${Port}/api-metadata/v1/${TenantAccessKey}/metadata/sinkinstances"
 	
 	TenantId=$1
-    	SinkInstanceOutput=$(curl -o ${WORKSPACE}sanity/adw/SinkInstance.txt -w '%{http_code}' -X POST ${SinkInstanceCreateCall} -d '{
+    	SinkInstanceOutput=$(curl -o ${WORKSPACE}/sanity/adw/SinkInstance.txt -w '%{http_code}' -X POST ${SinkInstanceCreateCall} -d '{
   "tenantId": '"${TenantId}"',
   "name": "FTPSink",
   "versionTS": 1617782336314,
@@ -160,13 +160,13 @@ IngestFlow()
 {
 
         echo "Creating Ingest Job...."
-        TenantAccessKey=$(sed -E 's/.*"accessKey":"?([^,"]*)"?.*/\1/' ${WORKSPACE}sanity/adw/TenantDetails.txt)
+        TenantAccessKey=$(sed -E 's/.*"accessKey":"?([^,"]*)"?.*/\1/' ${WORKSPACE}/sanity/adw/TenantDetails.txt)
 	
 	TenantId=$1
 
         IngestJobCreate="http://${Host}:${Port}/api-metadata/v1/${TenantAccessKey}/metadata/jobs"
         
-	IngestJobCreateOutput=$(curl -o ${WORKSPACE}sanity/adw/IngestCreate.txt -w '%{http_code}' -X POST ${IngestJobCreate} -d '{
+	IngestJobCreateOutput=$(curl -o ${WORKSPACE}/sanity/adw/IngestCreate.txt -w '%{http_code}' -X POST ${IngestJobCreate} -d '{
   "tenantId": '"${TenantId}"',
   "name": "Batch_Ingest_Test",
   "versionTS": 1614324857721,
@@ -7320,12 +7320,12 @@ ExportFlow()
         
         echo "##### Creating Export Job for Sanity #######"
         
-        TenantAccessKey=$(sed -E 's/.*"accessKey":"?([^,"]*)"?.*/\1/' ${WORKSPACE}sanity/adw/TenantDetails.txt)
+        TenantAccessKey=$(sed -E 's/.*"accessKey":"?([^,"]*)"?.*/\1/' ${WORKSPACE}/sanity/adw/TenantDetails.txt)
         echo $TenantAccessKey
      	TenantId=$1
 	   
         ExportJobCreate="http://${Host}:${Port}/api-metadata/v1/${TenantAccessKey}/metadata/jobs"
-        ExportJobCreateOutput=$(curl -o ${WORKSPACE}sanity/adw/ExportJobCreate.txt -w '%{http_code}' -X POST ${ExportJobCreate} -d '{
+        ExportJobCreateOutput=$(curl -o ${WORKSPACE}/sanity/adw/ExportJobCreate.txt -w '%{http_code}' -X POST ${ExportJobCreate} -d '{
   "tenantId": '"${TenantId}"',
   "name": "ExportJobForQuery",
   "versionTS": 1617782395128,
@@ -7461,5 +7461,3 @@ IngestFlow ${Id}
 
 echo "######### Creating Export Job ##########"
 ExportFlow ${Id}
-
-
