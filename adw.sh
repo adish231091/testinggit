@@ -1,4 +1,4 @@
-ter#!/bin/sh +x
+#!/bin/sh +x
 
 
 
