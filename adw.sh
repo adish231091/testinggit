@@ -1,5 +1,6 @@
 #!/bin/sh +x
 
+mkdir ${WORKSPACE}/sanity
 mkdir ${WORKSPACE}/sanity/adw
 
 IsTenantExist()
