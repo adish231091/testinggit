@@ -1,0 +1,21 @@
+#Host Details
+
+Host=144.25.34.159
+Port=80
+
+
+#Payload location
+IngestPayload=/home/opc/.jenkins/workspace/adw_sanity_payload
+TenantDetails=/home/opc/.jenkins/workspace/ADW_Sanity_TenantDetails
+
+#Authorized Token for ADW Env
+Token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJtY3BzIiwiaXNzIjoiaHR0cHM6Ly9pZGVudGl0eS5vcmFjbGVjbG91ZC5jb20vIiwiYXVkIjoidXJuOm9jeDpvdWRwaWQ6cGh4Om91ZHBzbXNlcnZlciIsInN1Yl90eXBlIjoiY2xpZW50Iiwic2NvcGUiOiJ1cm46b2N4Om91ZHBzY29wZTpjbGllbnQiLCJleHAiOjE1OTg5MjI1MTAsImlhdCI6MTU5ODU2MzY2MiwianRpIjoiNWY4MzkwMWMtZjZkYy00NGYxLWJiMGEtYmQ2Y2RmMjliYmRiIn0.JM03enklc-58b0Gu-q8mcWI4gngJB5LV4E0cQAIfOgM
+
+#Headers for ADW Env
+ContentType="Content-type"
+Application="application/json"
+
+#Exported Data 
+ExportPath=/home/alex/data/mcps/SanityADW/export
+
+
