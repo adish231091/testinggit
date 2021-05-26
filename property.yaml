@@ -1,0 +1,11 @@
+#ENV Details 
+HostEnv: "100.104.146.150"
+PortEnv: "8081"
+TenantAccessKeyEnv: "5e90c2883452487ab2429ffac62168f3"
+
+#Publish Tenant
+TypeEnv: "publish"
+ApiTypeEnv: "api-admin"
+
+#Truncate Tenant
+TruncateTenantType: "provision"
