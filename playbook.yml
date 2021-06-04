@@ -1,0 +1,11 @@
+---
+
+
+- name: Lets execute test1 script into another location of same folder.
+  user: test
+  hosts: localhost
+  tasks:
+  - name: Execute test script
+    command: sh /Users/adishsharma/automation/ansiblestuff/test.sh
+    register: "output"
+  - debug: var=output.stdout_lines
