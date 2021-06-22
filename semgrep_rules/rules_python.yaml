@@ -1,0 +1,38 @@
+rules:
+- id: insecure-eval-use
+  patterns:
+  - pattern: eval(...)
+  - pattern-not: eval("...")
+  message: Calling 'eval' with user input
+  languages: [python]
+  severity: WARNING
+
+- id: performing-mathematical-operation
+  patterns:
+  - pattern: $VAR4=$VAR1/$VAR2
+  - pattern-not: $VAR3+$VAR4
+  message: Adding 2 numbers and storing their result in third variable
+  languages: [python]
+  severity: INFO
+
+- id: Length-of-List
+  patterns:
+  - pattern: $VAR1=len(...)
+  - pattern-not: length()
+  message: Fetching of list data structure in python
+  languages: [python]
+  severity: INFO
+
+- id: Applying-lowercase-on-string
+  patterns:
+  - pattern: $VAR1.lower()
+  message: Applied lowercase function on string
+  languages: [python]
+  severity: INFO
+
+- id: Declaring-dictionary
+  patterns:
+  - pattern:  "{..., $KEY: $VALUE, ...}"
+  message: Declared dictionary
+  languages: [python]
+  severity: INFO

@@ -1,0 +1,33 @@
+rules:
+- id: lowercase-string
+  patterns:
+  - pattern: $VAR1.downcase
+  - pattern-not: $VAR1.downcase("...")
+  message: Calling 'downcase' with user input
+  languages: [ruby]
+  severity: WARNING
+
+- id: checking-require-command
+  patterns:
+  - pattern: require
+  message: Checking require command at the top of ruby script/code
+  languages: [ruby]
+  severity: INFO
+
+- id: declaring-array
+  patterns:
+  - pattern: Array
+  message: Initializing array with few elements
+  languages: [ruby]
+  severity: INFO
+
+- id: rspec-matchers
+  patterns:
+  - pattern: expect(...)
+  message: Comparing 2 variables for equality
+  languages: [ruby]
+  severity: INFO
+
+
+
+

@@ -1,0 +1,37 @@
+rules:
+- id: println-function
+  patterns:
+  - pattern: System.out.println(...)
+  message: System Out Println function
+  languages: [java]
+  severity: WARNING
+
+- id : Class-name
+  patterns:
+  - pattern: |
+     class $CLASS
+  message: Fetching class name
+  languages: [java]
+  severity: INFO
+
+- id: string-to-lowercase
+  patterns:
+  - pattern: $VAR.toLowerCase();
+  message: Converting String to LowerCase String
+  languages: [java]
+  severity: INFO
+
+- id: finding-static-variable-declaration
+  patterns:
+  - pattern: |
+      static String $VAR1="bangalore";
+  message: Find static variable declaration
+  languages: [java]
+  severity: INFO
+
+- id : finding-initalized-final-variable
+  patterns:
+  - pattern: final int $VAR=10;
+  message: finding initialized final variable
+  languages: [java]
+  severity: INFO
